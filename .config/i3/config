@@ -2,6 +2,7 @@
 #      CONFIGURATION I3       #
 ###############################
 # Doc : http://i3wm.org/docs/userguide.html
+# https://github.com/Grafikart/dotfiles/blob/master/config/i3/.config/i3/config
 
 set $mod Mod4
 set $alt Mod1
@@ -213,15 +214,14 @@ floating_minimum_size 75 x 50
 floating_maximum_size -1 x -1
 
 # Force certaines apps à des wokspaces dédiés
-# Workspace 1 (Code)
-assign [class="xterm|urxvt"]                                  $ws1
-assign [class="jetbrains-idea|Code"]                    $ws2
+assign [class="xterm|URxvt"]                                    $ws1
+assign [class="jetbrains-idea|Code"]                            $ws2
 assign [class="Google-chrome|Vivaldi-stable|Opera|Firefox"]     $ws3
-assign [class="MellowPlayer"]                                $ws8
-for_window [class="MellowPlayer"]          move to workspace $ws8
-assign [class="Spotify"]                                $ws9
-for_window [class="Spotify"]           move to workspace $ws9
-for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"] floating enable
+assign [class="MellowPlayer"]                                   $ws8
+for_window [class="MellowPlayer"]                               move to workspace $ws8
+assign [class="Spotify"]                                        $ws9
+for_window [class="Spotify"]                                    move to workspace $ws9
+for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"]    floating enable
 
 ###############################
 #            MISC             #
