@@ -1,0 +1,12 @@
+[alias]
+	coa = !git add -A && git commit -m
+	coam = !git add -A && git commit --amend -m
+	rao = remote add origin
+	undo = reset HEAD~1 --mixed
+	new = checkout -b
+	up  = submodule update --init --recursive --remote
+	last = log -1 HEAD --stat
+	save = !git add -A && git commit -m 'chore: commit save point'
+	graph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+	graph2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	rename = branch -m

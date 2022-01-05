@@ -21,9 +21,10 @@ set_from_resource       $active       active
 set_from_resource       $inactive     secondary
 set_from_resource       $background   background
 set_from_resource       $foreground   foreground
+set_from_resource       $primary      primary
 
 # class			border	    backgr.   	text	       indicat   child_border
-client.focused          $background $background $active        #FF8226   $active
+client.focused          $background $background $active        $primary   $active
 client.focused_inactive $background $background inactive       #5A638C   $inactive
 client.unfocused        $background #16161E     $inactive      #34384D   $inactive
 client.urgent           $active     $active    	$background    #DB4B4B   $active
@@ -43,16 +44,14 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt -cd "`xcwd`"
 
 # kill focused window
-bindsym $mod+Shift+A kill
 bindsym $alt+F4 kill
 bindsym $mod+Shift+Q kill
 
-# Rofi comme lanceur d'application
-# bindsym $mod+d exec rofi -show run -display-run ":"
- bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps : " -line-padding 4 \
-                 -columns 1 -padding 10 -hide-scrollbar \
-                 -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11" \
-                 -config ~/.config/rofi/config.rasi
+# Rofi start app
+bindsym $mod+d exec sh ~/.config/rofi/launchers/start.sh
+
+# Rofi start powermenu
+bindsym $mod+Escape exec sh ~/.config/rofi/powermenu/start.sh
 
 # Changement du Focus
 bindsym $mod+j focus left
@@ -130,17 +129,19 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+
 # Audio
-# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 # Play / Pause Spotify
-# bindsym XF86AudioPlay exec playerctl --all-players play-pause
-# bindsym XF86AudioPause exec playerctl --all-players play-pause
-# bindsym XF86AudioNext exec playerctl --all-players next
-# bindsym XF86AudioPrev exec playerctl --all-players previous
-# Capture d'écran
-# bindsym Print exec flameshot gui --path ~/Téléchargements
+bindsym XF86AudioPlay exec playerctl --all-players play-pause
+bindsym XF86AudioPause exec playerctl --all-players play-pause
+bindsym XF86AudioNext exec playerctl --all-players next
+bindsym XF86AudioPrev exec playerctl --all-players previous
+# ScreenShot
+bindsym Print exec flameshot gui --path ~/Downloads
+
 
 ###############################
 #          SOURIS             #
@@ -165,8 +166,8 @@ set $ws8 "8"
 set $ws9 "9"
 
 set $monitorCenter DP-0
-set $monitorLeft   DP-1
-set $monitorRight  DP-2
+set $monitorLeft   DP-2
+set $monitorRight  DP-4
 
 # Ecran associé à chaque Workspace
 workspace $ws1 output $monitorLeft
@@ -181,7 +182,7 @@ workspace $ws9 output $monitorRight
 
 # Changmeent de Workspace
 bindsym $mod+ampersand workspace $ws1
-bindsym $mod+eacute workspace $ws2
+bindsym $mod+eacute workspace $ws2;layout tabbed
 bindsym $mod+quotedbl workspace $ws3
 bindsym $mod+apostrophe workspace $ws4
 bindsym $mod+parenleft workspace $ws5
@@ -214,14 +215,16 @@ floating_minimum_size 75 x 50
 floating_maximum_size -1 x -1
 
 # Force certaines apps à des wokspaces dédiés
-assign [class="xterm|URxvt"]                                    $ws1
-assign [class="jetbrains-idea|Code"]                            $ws2
-assign [class="Google-chrome|Vivaldi-stable|Opera|Firefox"]     $ws3
-assign [class="MellowPlayer"]                                   $ws8
-for_window [class="MellowPlayer"]                               move to workspace $ws8
-assign [class="Spotify"]                                        $ws9
-for_window [class="Spotify"]                                    move to workspace $ws9
-for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"]    floating enable
+assign [class="xterm|URxvt"]                                  $ws3
+# for_window [class="URxvt"]           move to workspace $ws1
+assign [class="jetbrains-idea|Code"]                    $ws1
+assign [class="UnityHub|Unity"]                         $ws2
+assign [class="Google-chrome|Vivaldi-stable|Opera|Firefox|firefox|firefoxdeveloperedition"]     $ws2
+assign [class="MellowPlayer"]                                $ws8
+for_window [class="MellowPlayer"]          move to workspace $ws8
+assign [class="Spotify"]                                $ws9
+for_window [class="Spotify"]           move to workspace $ws9
+for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"] floating enable
 
 ###############################
 #            MISC             #
@@ -230,16 +233,17 @@ for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"]    floating enable
 exec --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id picom --xrender-sync-fence
 exec --no-startup-id spotify
+exec --no-startup-id urxvt -cd "`xcwd`"
+exec --no-startup-id code
+exec --no-startup-id firefox-developer-edition
 # exec --no-startup-id discord
 # exec --no-startup-id easystroke
 # exec --no-startup-id redshift -l 43.610769:3.876716 -t 6500:3500 -l manual
 # exec --no-startup-id nm-applet --sm-disable
-# exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id xmodmap ~/.Xmodmap
 # Pamac Manager a besoin de ça pour gérer l'authentification
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# Désactive capslock
-exec --no-startup-id setxkbmap -option caps:none
+exec --no-startup-id sleep 1 && xrandr --output HDMI-0 --off --output DP-0 --primary --mode 1920x1080 --rate 165 --pos 1080x420 --rotate normal --output DP-1 --off --output DP-2 --mode 1920x1080 --rate 165 --pos 0x0 --rotate left --output DP-3 --off --output DP-4 --mode 1920x1080 --rate 165 --pos 3000x420 --rotate normal --output DP-5 --off && killall polybar;polybar -r main & polybar -r right & polybar -r left
 
 # I3 Gaps
 for_window [class="^.*"] border pixel 2
@@ -248,7 +252,4 @@ gaps inner 10
 smart_borders on
 smart_gaps on
 
-# Redémarre polybar quand on redémarre i3
-exec_always --no-startup-id "killall polybar;polybar -r main & polybar -r right"
-#polybar -r main & polybar -r left & polybar -r right
-# sh ~/.config/polybar/launch.sh
+exec_always --no-startup-id "killall polybar;polybar -r main & polybar -r right & polybar -r left"

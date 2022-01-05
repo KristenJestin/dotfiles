@@ -1,9 +1,13 @@
 /* colors */
 
 * {
-  al:  #00000000;
-  bg:  #444B6Aff;
-  se:  #101010ff;
-  fg:  #FFFFFFff;
-  ac:  #FF8226FF;
+  alpha:  #00000000;
+  accent:  #FF8226FF;
+  background:         #25344Bff;
+  background-alt:     #2A3950ff;
+  foreground:         #FEFFF1ff;
+  selected:           #6F88FE1a;
+  urgent:             #DA4453FF;
+  /*border:             #A162F7ff;*/
 }
+
