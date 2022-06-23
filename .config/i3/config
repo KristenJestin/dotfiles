@@ -32,7 +32,7 @@ client.placeholder      $background $background $foreground    #000000   $inacti
 client.background       $background
 
 # Fond d'écran
-# exec_always --no-startup-id ~/.config/i3/bing-wallpaper.sh
+exec_always --no-startup-id sleep 2 && feh --bg-fill ~/Images/wallpaper.jpg
 
 ###############################
 #         KEYBINDING          #
@@ -101,7 +101,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Ouvrir l'exploreur de fichier
-bindsym $mod+e exec nautilus "Downloads"
+bindsym $mod+e exec thunar
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -135,12 +135,13 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 # Play / Pause Spotify
-bindsym XF86AudioPlay exec playerctl --all-players play-pause
-bindsym XF86AudioPause exec playerctl --all-players play-pause
-bindsym XF86AudioNext exec playerctl --all-players next
-bindsym XF86AudioPrev exec playerctl --all-players previous
+bindsym XF86AudioStop exec playerctl -p spotify stop
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym XF86AudioPause exec playerctl -p spotify play-pause
+bindsym XF86AudioNext exec playerctl -p spotify next
+bindsym XF86AudioPrev exec playerctl -p spotify previous
 # ScreenShot
-bindsym Print exec flameshot gui --path ~/Downloads
+bindsym Print exec flameshot gui
 
 
 ###############################
@@ -165,9 +166,9 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 
-set $monitorCenter DP-0
-set $monitorLeft   DP-2
-set $monitorRight  DP-4
+set $monitorCenter DP-4
+set $monitorLeft   DP-0
+set $monitorRight  DP-2
 
 # Ecran associé à chaque Workspace
 workspace $ws1 output $monitorLeft
@@ -218,12 +219,17 @@ floating_maximum_size -1 x -1
 assign [class="xterm|URxvt"]                                  $ws3
 # for_window [class="URxvt"]           move to workspace $ws1
 assign [class="jetbrains-idea|Code"]                    $ws1
-assign [class="UnityHub|Unity"]                         $ws2
+assign [class="unityhub|Unity"]                         $ws2
 assign [class="Google-chrome|Vivaldi-stable|Opera|Firefox|firefox|firefoxdeveloperedition"]     $ws2
+assign [class="discord"]     $ws4
+assign [class="Thunderbird|Proton Mail Bridge"]     $ws5
+for_window [class="Proton Mail Bridge"]           move to workspace $ws5
+assign [class="Thunderbird|Proton Mail Bridge"]     layout tabbed
 assign [class="MellowPlayer"]                                $ws8
 for_window [class="MellowPlayer"]          move to workspace $ws8
 assign [class="Spotify"]                                $ws9
 for_window [class="Spotify"]           move to workspace $ws9
+assign [class="obs"]                    $ws6
 for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"] floating enable
 
 ###############################
@@ -233,17 +239,19 @@ for_window [class="Pcmanfm|Nautilus|Thunar|Toplevel|kruler"] floating enable
 exec --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id picom --xrender-sync-fence
 exec --no-startup-id spotify
+exec --no-startup-id firefox-developer-edition
 exec --no-startup-id urxvt -cd "`xcwd`"
 exec --no-startup-id code
-exec --no-startup-id firefox-developer-edition
-# exec --no-startup-id discord
+exec --no-startup-id discord
+exec --no-startup-id thunderbird
+exec --no-startup-id protonmail-bridge
 # exec --no-startup-id easystroke
 # exec --no-startup-id redshift -l 43.610769:3.876716 -t 6500:3500 -l manual
 # exec --no-startup-id nm-applet --sm-disable
 exec --no-startup-id xmodmap ~/.Xmodmap
 # Pamac Manager a besoin de ça pour gérer l'authentification
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id sleep 1 && xrandr --output HDMI-0 --off --output DP-0 --primary --mode 1920x1080 --rate 165 --pos 1080x420 --rotate normal --output DP-1 --off --output DP-2 --mode 1920x1080 --rate 165 --pos 0x0 --rotate left --output DP-3 --off --output DP-4 --mode 1920x1080 --rate 165 --pos 3000x420 --rotate normal --output DP-5 --off && killall polybar;polybar -r main & polybar -r right & polybar -r left
+exec --no-startup-id sleep 1 && xrandr --output HDMI-0 --off --output DP-4 --primary --mode 1920x1080 --rate 165 --pos 1080x420 --rotate normal --output DP-1 --off --output DP-0 --mode 1920x1080 --rate 165 --pos 0x0 --rotate left --output DP-3 --off --output DP-2 --mode 1920x1080 --rate 165 --pos 3000x420 --rotate normal --output DP-5 --off && killall polybar;polybar -r main & polybar -r right & polybar -r left
 
 # I3 Gaps
 for_window [class="^.*"] border pixel 2
@@ -253,3 +261,7 @@ smart_borders on
 smart_gaps on
 
 exec_always --no-startup-id "killall polybar;polybar -r main & polybar -r right & polybar -r left"
+
+exec --no-startup-id i3-msg "workspace $ws1; layout tabbed"
+exec --no-startup-id i3-msg "workspace $ws2; layout tabbed"
+exec --no-startup-id i3-msg "workspace $ws5; layout tabbed"

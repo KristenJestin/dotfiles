@@ -37,7 +37,7 @@ include-file = ~/.config/polybar/user_modules.ini
 ; If unspecified, the application will pick the first one it finds.
 ; $ polybar -m | cut -d ':' -f 1
 ; $ xrandr -q | grep " connected" | cut -d ' ' -f1
-MONITOR = DP-0
+MONITOR = DP-4
 MONITOR-EXACT = true
 ; MONITOR=${env:MONITOR:}
 
@@ -133,7 +133,7 @@ module-margin-right = 2
 ; See the Fonts wiki page for more details
 
 font-0 = "Iosevka Nerd Font:size=10;3"
-font-1 = "Font Awesome 5 Free Solid::size=11;3"
+font-1 = "Font Awesome 6 Free Solid::size=11;3"
 ;font-1 = "icomoon\-feather:size=12;3"
 
 ; Modules are added to one of the available blocks
@@ -253,7 +253,7 @@ cursor-scroll =
 
 [bar/left]
 inherit = bar/main
-monitor = DP-2
+monitor = DP-0
 
 modules-center = 
 modules-right = memory cpu
@@ -261,9 +261,7 @@ modules-right = memory cpu
 
 [bar/right]
 inherit = bar/main
-monitor = DP-4
-
-enable-ipc = true
+monitor = DP-2
 
 modules-center = spotify previous playpause next
 modules-right = alsa date sysmenu

@@ -1,0 +1,65 @@
+// to install
+arandr
+base
+blender
+dhcpcd
+discord
+docker
+docker-compose
+dotnet-sdk-bin
+efibootmgr
+feh
+firefox-developer-edition
+flameshot
+gimp
+gnome-keyring
+google-chrome
+grub
+i3-gaps
+i3status
+intel-ucode
+iwd
+libgnome-keyring
+lightdm-gtk-greeter
+linux-firmware
+mono-basic
+mono-msbuild
+mpv
+nano
+nautilus
+nerd-fonts-terminus
+netctl
+networkmanager
+notion-app
+ntfs-3g
+nvidia
+nvm
+obs-studio
+pavucontrol
+picom
+playerctl
+polybar-spotify-module
+protonmail-bridge
+pulseaudio
+rofi
+rsync
+ruby2.7
+rxvt-unicode
+thunar
+thunderbird
+ttf-fira-code
+ttf-font-awesome
+ttf-icomoon-feather
+ttf-material-design-icons
+unityhub
+vim
+visual-studio-code-bin
+xcwd-git
+xterm
+yay
+
+
+// bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash >> ~/.git-completion.bash
+source ~/.git-completion.bash
+source ~/.bashrc
