@@ -74,8 +74,7 @@ xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb
 xorg-sessreg
-xorg-smproxy
-xorg-x11perf
+xorg-smproxyvis
 xorg-xbacklight
 xorg-xclock
 xorg-xcmsdb
