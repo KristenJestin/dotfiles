@@ -1,10 +1,56 @@
+#define S_primary  #A162F7
+#define S_primary_dark  #600ad5
+#define S_primary_light  #4b367f
+
+#define S_background         #0f172a
+#define S_background2         #1e293b
+
+! ============
+!   Colors
+! ============
+; *primary:  #FF8226
+; *primary-dark:  #63300b
+
+*primary:  S_primary
+*primary-dark:  S_primary_dark
+*primary-light:  S_primary_light
+*primary-text:   #FFFFFF
+*primary-muted:   #C0CAF5
+*secondary:  #475569
+*active:    #cbd5e1
+
+; * fading: 20
+; *fadeColor: #5A638C
+
+*background:  S_background
+*background2:   S_background2  
+*foreground:   #f1f5f9
+*cursorColor:  #9aedfe
+
+*color0:      #33303b
+*color8:      #4f4b58
+*color1:      #ff5c57
+*color9:      #ff5c57
+*color2:      #5af78e
+*color10:     #5af78e
+*color3:      #f3f99d
+*color11:     #f3f99d
+*color4:      #57c7ff
+*color12:     #57c7ff
+*color5:      #ff6ac1
+*color13:     #ff6ac1
+*color6:      #9aedfe
+*color14:     #9aedfe
+*color7:      #eff0eb
+*color15:     #eff0eb
+
 ! ===================
 !       urxvt
 ! ===================
 
 URxvt*scrollBar:	    false
-URxvt*letterSpace:  	-1
-URxvt.internalBorder: 10
+URxvt*letterSpace:  	0
+URxvt.internalBorder: 16
 URxvt*font: 		      xft:Fira Code:regular:size=10
 URxvt*boldFont:		    xft:Fira Code:bold:size=10
 URxvt*cursorBlink:    true
@@ -12,6 +58,7 @@ URxvt.iso14755:		    false
 URxvt*utf8:			      true
 URxvt.keysym.C-equal:      resize-font:bigger
 URxvt.keysym.C-parenright: resize-font:smaller
+URxvt*background: S_background2
 
 ! =================
 !       Xft
@@ -22,37 +69,3 @@ Xft.rgba:			      subpixel
 Xft.hinting:       	true
 Xft.hintstyle:		  hintslight
 ! Xft.lcdfilter:	  lcddefault
-
-! ============
-!   Couleurs
-! ============
-*primary:  #FF8226
-*primary-dark:  #63300b
-*primary-text:   #FFFFFF
-*primary-muted:   #C0CAF5
-*secondary:  #444B6A
-*active:     #C0CAF5
-
-*.foreground:   #C0CAF5
-*foreground-alt:   #8F8F8F
-*.background:   #1A1B26
-*.cursorColor:  #C0CAF5
-* fading: 20
-*fadeColor: #5A638C
-
-*.color0:                #6878A6
-*.color8:                #5d6791
-*.color1:                #DB4B4B
-*.color9:                #A6333F
-*.color2:                #9ECE6A
-*.color10:               #9ECE6A
-*.color3:                #E0AF68
-*.color11:               #BBA461
-*.color4:                #7AA2F7
-*.color12:               #6D91DE
-*.color5:                #BB9AF7
-*.color13:               #9D7CD8
-*.color6:                #41A6B5
-*.color14:               #449DAB
-*.color7:                #C0CAF5
-*.color15:               #9AA5CE

@@ -20,5 +20,4 @@ window {
 
 entry {
     expand: 				true;
-    text-color:				@border;
 }

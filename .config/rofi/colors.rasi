@@ -2,12 +2,14 @@
 
 * {
   alpha:  #00000000;
+  /*accent:  #FF8226FF;*/
   accent:  #FF8226FF;
   background:         #25344Bff;
   background-alt:     #2A3950ff;
   foreground:         #FEFFF1ff;
   selected:           #6F88FE1a;
   urgent:             #DA4453FF;
-  /*border:             #A162F7ff;*/
+  border:             #A162F7ff;
+  /*border:             @accent;*/
 }
 

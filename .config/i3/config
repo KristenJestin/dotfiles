@@ -222,9 +222,6 @@ assign [class="jetbrains-idea|Code"]                    $ws1
 assign [class="unityhub|Unity"]                         $ws2
 assign [class="Google-chrome|Vivaldi-stable|Opera|Firefox|firefox|firefoxdeveloperedition"]     $ws2
 assign [class="discord"]     $ws4
-assign [class="Thunderbird|Proton Mail Bridge"]     $ws5
-for_window [class="Proton Mail Bridge"]           move to workspace $ws5
-assign [class="Thunderbird|Proton Mail Bridge"]     layout tabbed
 assign [class="MellowPlayer"]                                $ws8
 for_window [class="MellowPlayer"]          move to workspace $ws8
 assign [class="Spotify"]                                $ws9
@@ -243,8 +240,6 @@ exec --no-startup-id firefox-developer-edition
 exec --no-startup-id urxvt -cd "`xcwd`"
 exec --no-startup-id code
 exec --no-startup-id discord
-exec --no-startup-id thunderbird
-exec --no-startup-id protonmail-bridge
 # exec --no-startup-id easystroke
 # exec --no-startup-id redshift -l 43.610769:3.876716 -t 6500:3500 -l manual
 # exec --no-startup-id nm-applet --sm-disable
@@ -262,6 +257,10 @@ smart_gaps on
 
 exec_always --no-startup-id "killall polybar;polybar -r main & polybar -r right & polybar -r left"
 
-exec --no-startup-id i3-msg "workspace $ws1; layout tabbed"
-exec --no-startup-id i3-msg "workspace $ws2; layout tabbed"
-exec --no-startup-id i3-msg "workspace $ws5; layout tabbed"
+# Default layout
+exec --no-startup-id sleep 1 && i3-msg "workspace $ws1; layout tabbed"
+exec --no-startup-id sleep 1 && i3-msg "workspace $ws2; layout tabbed"
+exec --no-startup-id sleep 1 && i3-msg "workspace $ws5; layout tabbed"
+
+# Open on workspace
+exec --no-startup-id sleep 1 && i3-msg "workspace $ws2"
